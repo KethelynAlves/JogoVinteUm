@@ -5,6 +5,15 @@ import java.util.List;
 
 public class Player {
     public List<Card> hand;
+    private String name;
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Player(String name){
+        this.name = name;
+    }
 
     public void receiveCard(Deck deck){
         this.hand.add(deck.drawCard());
@@ -13,7 +22,7 @@ public class Player {
     public Player(Deck deck){
         this.hand = new ArrayList<>();
 
-        for (int i=0; i<2; i++){
+        for (int i=0; i<1; i++){
             this.receiveCard(deck);
         }
     }

@@ -15,7 +15,6 @@ public class Deck {
                 this.cards.add(new Card(suit, rank));
             }
         }
-
         Collections.shuffle(this.cards);
     }
 
@@ -27,10 +26,10 @@ public class Deck {
         return this.cards.size();
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Deck{" + "cards=" + cards + '}';
-    }
+    }*/
 
     public List<Card> getCards() {
         return cards;
