@@ -26,11 +26,6 @@ public class Deck {
         return this.cards.size();
     }
 
-    /*@Override
-    public String toString() {
-        return "Deck{" + "cards=" + cards + '}';
-    }*/
-
     public List<Card> getCards() {
         return cards;
     }
