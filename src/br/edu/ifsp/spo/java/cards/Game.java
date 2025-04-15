@@ -6,7 +6,7 @@ public class Game {
     private Deck deck;
     private Player player1;
     private Player player2;
-    private ScoreBasic score = new ScoreBasic();
+    private ScorerBasic scorer = new ScorerBasic();
 
     public void starGame(){
         var scanner = new Scanner(System.in);
@@ -22,11 +22,11 @@ public class Game {
 
         player1 = new Player(deck);
         player1.receiveCard(deck);
-        result[0] = score.calcValue(player1.hand);
+        result[0] = scorer.calculateScore(player1.hand);
 
         player2 = new  Player(deck);
         player2.receiveCard(deck);
-        result[1] = score.calcValue(player2.hand);
+        result[1] = scorer.calculateScore(player2.hand);
         System.out.println("-Player "+ player1name +" tem as cartas: " + player1.hand +" : Pontos " + result[0]);
         System.out.println("-Player "+ player2name +" tem as cartas: " + player2.hand +" : Pontos " + result[1]);
 
