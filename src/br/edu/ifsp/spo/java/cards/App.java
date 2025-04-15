@@ -1,6 +1,6 @@
 package br.edu.ifsp.spo.java.cards;
 
-import java.text.MessageFormat;
+import br.edu.ifsp.spo.java.cards.core.Game;
 
 public class App {
 
