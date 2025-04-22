@@ -1,55 +1,60 @@
 package br.edu.ifsp.spo.java.cards.core;
 
+
 import br.edu.ifsp.spo.java.cards.items.Card;
 import br.edu.ifsp.spo.java.cards.items.Deck;
-import br.edu.ifsp.spo.java.cards.rules.ScorerBasic;
+import br.edu.ifsp.spo.java.cards.items.Rank;
+import br.edu.ifsp.spo.java.cards.rules.Score;
+import br.edu.ifsp.spo.java.cards.rules.ScoreAceEleven;
+import br.edu.ifsp.spo.java.cards.rules.ScoreBasic;
+import br.edu.ifsp.spo.java.cards.ui.TerminalGameUi;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game {
     private Deck deck;
     private Player player1;
     private Player player2;
-    private ScorerBasic scorer = new ScorerBasic();
+    private Score score;
+    private final TerminalGameUi terminal = new TerminalGameUi();
+    private final ArrayList<String> playerNames = new ArrayList<>();
 
     public void starGame(){
-        var scanner = new Scanner(System.in);
-        System.out.println("Insira nome do jagador 1: ");
-        var player1name = scanner.nextLine();
-        System.out.println("Insira nome do jagador 2: ");
-        var player2name = scanner.nextLine();
-
-        int[] result = new int[2];
-
+        for (int i = 0; i<2; i++) {
+            String name = terminal.requestPlayerName(i+1);
+            playerNames.add(name);
+        }
+        int mode = terminal.requestGameMode();
+        if (mode == 1){
+            score = new ScoreBasic();
+        } else {
+            score = new ScoreAceEleven();
+        }
         this.deck = new Deck();
-        Card card = this.deck.drawCard();
-
         player1 = new Player(deck);
         player1.receiveCard(deck);
-        result[0] = scorer.calculateScore(player1.hand);
+        int score1 = score.calculateScore(player1.hand);
 
         player2 = new  Player(deck);
         player2.receiveCard(deck);
-        result[1] = scorer.calculateScore(player2.hand);
-        System.out.println("-Player "+ player1name +" tem as cartas: " + player1.hand +" : Pontos " + result[0]);
-        System.out.println("-Player "+ player2name +" tem as cartas: " + player2.hand +" : Pontos " + result[1]);
+        int score2 = score.calculateScore(player2.hand);
+        System.out.println("-Player "+ playerNames.get(0) +" tem as cartas: " + player1.hand +" : Pontos " + score1);
+        System.out.println("-Player "+ playerNames.get(1) +" tem as cartas: " + player2.hand +" : Pontos " + score2);
 
         System.out.println("\n\n\nVencedor é...");
-        if (result[0]>result[1] && result[0]<=21){
-            System.out.println(player1name+"!");
-        } else if (result[0]>21){
-            System.out.println(player1name + " estourou a mesa.\n" + player2name+ " venceu!");
-        } else if(result[1]>result[0] && result[1]<=21){
-            System.out.println(player2name);
-        } else if (result[1]>21) {
-            System.out.println(player2name + " estourou a mesa.\n" + player1name+ " venceu!");
+        if (score1>score2 && score1<=21){
+            System.out.println(playerNames.get(0)+"!");
+        } else if (score1>21){
+            System.out.println(playerNames.get(0) + " estourou a mesa.\n" + playerNames.get(1) + " venceu!");
+        } else if(score2>score1 && score2<=21){
+            System.out.println(playerNames.get(1));
+        } else if (score2>21) {
+            System.out.println(playerNames.get(1) + " estourou a mesa.\n" + playerNames.get(0) + " venceu!");
         }
-        if (result[0]==result[1]){
+        if (score1==score2){
             System.out.println("Empate.");
         }
-
         System.out.println("\nSobraram: "+ deck.remainingCards() +" cartas.");
-
 
     }
 }
