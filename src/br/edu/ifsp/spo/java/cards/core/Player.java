@@ -2,12 +2,13 @@ package br.edu.ifsp.spo.java.cards.core;
 
 import br.edu.ifsp.spo.java.cards.items.Card;
 import br.edu.ifsp.spo.java.cards.items.Deck;
+import br.edu.ifsp.spo.java.cards.rules.Score;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private String name;
+    public String name;
     public List<Card> hand;
 
     public Player(String name){
@@ -18,12 +19,10 @@ public class Player {
     @Override
     public String toString() {
         var result = "Player: " + this.getName();
-        result += "\n- Current hand: ";
-
+        result += "\n- Mão atual: ";
         for (var card : this.hand) {
             result += "\n-- " + card.toString();
         }
-
         return result;
     }
 

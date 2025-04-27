@@ -20,7 +20,7 @@ public class TerminalGameUi implements GameUi {
     }
 
     @Override
-    public int requestGameMode() {
+    public Score requestGameMode() {
         var scanner = new Scanner(System.in);
         System.out.println("Insira o modo de jogo: \n1)Ace valendo '1' pontos\n2)Ace valendo '11' pontos");
         int mode = scanner.nextInt();
@@ -30,7 +30,7 @@ public class TerminalGameUi implements GameUi {
             case 1 -> score = new ScoreBasic();
             case 2 -> score = new ScoreAceEleven();
             default -> score = new ScoreBasic();
-        };
+        }
         return score;
     }
 
