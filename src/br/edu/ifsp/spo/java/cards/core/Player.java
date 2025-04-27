@@ -7,17 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+    private String name;
     public List<Card> hand;
 
-    public void receiveCard(Deck deck){
-        this.hand.add(deck.drawCard());
-    }
-
-    public Player(Deck deck){
+    public Player(String name){
         this.hand = new ArrayList<>();
-        for (int i=0; i<1; i++){
-            this.receiveCard(deck);
-        }
+        this.name = name;
     }
 
+    @Override
+    public String toString() {
+        var result = "Player: " + this.getName();
+        result += "\n- Current hand: ";
+
+        for (var card : this.hand) {
+            result += "\n-- " + card.toString();
+        }
+
+        return result;
+    }
+
+    public void receiveCard(Card card){
+        this.hand.add(card);
+    }
+    private String getName(){return this.name;}
+    public List<Card> getHand() {return this.hand;}
 }
