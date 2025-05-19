@@ -13,8 +13,6 @@ public class Game {
     private Player player1;
     private Player player2;
     private Score score;
-    //private final TerminalGameUi terminal = new TerminalGameUi();
-    //private final ArrayList<String> playerNames = new ArrayList<>();
     private final GameUi ui;
 
     public Game(GameUi gameUi){
@@ -22,11 +20,16 @@ public class Game {
         this.initialize();
     }
 
+    public void PlayMatch(){
+        var scanner = new Scanner(System.in);
+        System.out.println("Quantas rodadas quer ter?");
+        int numRodadas = scanner.nextInt();
+
+
+
+    }
+
     private void initialize(){
-        /*for (int i = 0; i<2; i++) {
-            String name = ui.requestPlayerName(i+1);
-            playerNames.add(name);
-        }*/
 
         this.player1 = new Player(ui.requestPlayerName(1));
         this.player2 = new Player(ui.requestPlayerName(2));

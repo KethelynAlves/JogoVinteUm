@@ -1,7 +1,6 @@
 package br.edu.ifsp.spo.java.cards.core;
 
 public class PlayerIA extends Player{
-
     public PlayerIA(){
         super("Hal-9000");
     }

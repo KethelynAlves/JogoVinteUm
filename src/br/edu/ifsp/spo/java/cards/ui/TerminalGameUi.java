@@ -6,7 +6,6 @@ import br.edu.ifsp.spo.java.cards.rules.Score;
 import br.edu.ifsp.spo.java.cards.rules.ScoreAceEleven;
 import br.edu.ifsp.spo.java.cards.rules.ScoreBasic;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
