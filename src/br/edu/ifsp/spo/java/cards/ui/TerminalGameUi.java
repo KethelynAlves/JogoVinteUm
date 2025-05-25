@@ -94,12 +94,15 @@ public class TerminalGameUi implements GameUi {
 
     @Override
     public void renderPoints(int playerScore) {
-
+        System.out.println("Pontuação final: "+ playerScore);
     }
 
     @Override
     public int selectRounds() {
-        return 0;
+        var scanner = new Scanner(System.in);
+        System.out.println("Quantas rodadas quer ter?");
+        int numRodadas = scanner.nextInt();
+        return numRodadas;
     }
 
     @Override

@@ -9,10 +9,15 @@ import java.util.List;
 
 public interface GameUi {
     String requestPlayerName(int playerNumber);
+
     Score requestGameMode();
+
     void renderGameStart();
+
     void renderStartTurn(String playerName);
+
     void renderHand(List<Card> hand, int score);
+
     PlayerAction requestAction();
 
     void renderBusted(String name);
