@@ -10,10 +10,12 @@ import java.util.List;
 public class Player {
     public String name;
     public List<Card> hand;
+    public int points;
 
     public Player(String name){
         this.hand = new ArrayList<>();
         this.name = name;
+        this.points = 0;
     }
 
     @Override
@@ -29,6 +31,12 @@ public class Player {
     public void receiveCard(Card card){
         this.hand.add(card);
     }
-    private String getName(){return this.name;}
+    String getName(){return this.name;}
     public List<Card> getHand() {return this.hand;}
+
+    public List<Card> discardHand(){
+        var discrdedCards = new ArrayList<>(this.hand);
+        this.hand.clear();
+        return discrdedCards;
+    }
 }
