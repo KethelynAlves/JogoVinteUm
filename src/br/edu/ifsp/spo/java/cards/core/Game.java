@@ -8,7 +8,6 @@ import br.edu.ifsp.spo.java.cards.rules.calculatePoints;
 import br.edu.ifsp.spo.java.cards.ui.GameUi;
 
 import java.util.Optional;
-import java.util.Scanner;
 
 public class Game {
     private Deck deck;
@@ -21,13 +20,13 @@ public class Game {
 
     public Game(GameUi gameUi){
         this.ui = gameUi;
+        this.player1 = new Player(ui.requestPlayerName(1));
+        this.player2 = new PlayerIA();
         //this.initialize();
         //this.calculatePoints = new calculatePoints();
     }
 
     private void initialize(){
-        this.player1 = new Player(ui.requestPlayerName(1));
-        this.player2 = new PlayerIA();
 
         this.score = new ScoreBasic();
         this.score = ui.requestGameMode();
@@ -45,16 +44,37 @@ public class Game {
         int rodadas = ui.selectRounds();
         int pontos1 = 0;
         int pontos2 = 0;
-
+        this.initialize();
         for (int i = 0; i<rodadas; i++){
-            System.out.println("Qantidade de rodas: " + i+1);
-            this.initialize();
-            this.Play();
+            System.out.println("\nQuantidade de rodadas restante: " + (rodadas-i-1));
+            this.resolveWinner();
+            Optional<Player> winner = this.Play();
+            if(winner.isPresent()){
+                if(winner.get() == player1){
+                    pontos1++;
+                } else if (winner.get() == player2){
+                    pontos2++;
+                } else {
+                    System.out.println("Empate");
+                }
+            }
+            this.restart();
+        }
+        System.out.println("\nPlacar: ");
+        System.out.println(player1.getName() + ": "+ pontos1);
+        System.out.println(player2.getName() + ": "+ pontos2);
+
+        if (pontos1 > pontos2) {
+            System.out.println(player1.getName() + " venceu o jogo!");
+        } else if (pontos2 > pontos1) {
+            System.out.println(player2.getName() + " venceu o jogo!");
+        } else {
+            System.out.println("O jogo terminou empatado!");
         }
 
     }
 
-    public void Play(){
+    public Optional<Player> Play(){
         Optional<Player> winner = Optional.empty();
 
         while (winner.isEmpty()){
@@ -65,13 +85,13 @@ public class Game {
 
             winner = this.resolveWinner();
 
-            if (winner.isPresent()){//apresenta o resultado
-                ui.renderWinner(winner.get());
-            } else { //ciclo reiniciado
+            if (winner.isEmpty()){//ciclo reiniciado
                 this.restart();
+            } else { //apresenta o resultado
+                ui.renderWinner(winner.get());
             }
-
         }
+        return winner;
     }
 
     public void restart(){
@@ -88,12 +108,11 @@ public class Game {
     public void executeTurn(Player player) {
         ui.renderStartTurn(player.getName());
 
-        PlayerAction action = PlayerAction.PASS;
+        PlayerAction action;
 
         do {
             var currentScore = this.score.calculateScore(player.getHand());
-            if (player instanceof PlayerIA) {
-                var ia = (PlayerIA) player;
+            if (player instanceof PlayerIA ia) {
                 action = ia.makeDecision(currentScore);
                 if (action == PlayerAction.HIT)
                     ia.receiveCard(this.deck.drawCard());
@@ -125,7 +144,7 @@ public class Game {
         var scorePlayer2 = this.score.calculateScore(this.player2.getHand());
         var isDraw = (scorePlayer1>21 && scorePlayer2>21) || (scorePlayer1==scorePlayer2);//se for empate
                 if(!isDraw){
-                    Optional<Player> winner = Optional.empty();
+                    Optional<Player> winner;
                     if (scorePlayer1>21)
                         winner = Optional.of(this.player2);//verifica se estorou
                      else if (scorePlayer2>21)

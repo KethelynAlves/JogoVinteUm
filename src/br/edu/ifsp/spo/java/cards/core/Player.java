@@ -31,7 +31,7 @@ public class Player {
     public void receiveCard(Card card){
         this.hand.add(card);
     }
-    String getName(){return this.name;}
+    public String getName(){return this.name;}
     public List<Card> getHand() {return this.hand;}
 
     public List<Card> discardHand(){

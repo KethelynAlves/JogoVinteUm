@@ -42,12 +42,12 @@ public class TerminalGameUi implements GameUi {
     @Override
     public void renderGameStart() {
         clearScreen();
-        System.out.println("Começando a partida!");
+        System.out.println("\nComeçando a partida!");
     }
 
     @Override
     public void renderStartTurn(String playerName) {
-        System.out.println("\nAgora é a vez de " + playerName);
+        System.out.println("Agora é a vez de " + playerName);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TerminalGameUi implements GameUi {
 
     @Override
     public void renderEndTurn(String name) {
-        System.out.println("\nFim da vez de " + name);
+        System.out.println("Fim da vez de " + name);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class TerminalGameUi implements GameUi {
 
     @Override
     public void renderWinner(Player winner) {
-        System.out.println("\n\nO vencedor é:");
+        System.out.println("\nO vencedor é:");
         System.out.println(winner);
     }
 
@@ -101,13 +101,13 @@ public class TerminalGameUi implements GameUi {
     public int selectRounds() {
         var scanner = new Scanner(System.in);
         System.out.println("Quantas rodadas quer ter?");
-        int numRodadas = scanner.nextInt();
-        return numRodadas;
+        return scanner.nextInt();
     }
 
     @Override
-    public void renderPoints2(Player player1, Player player2) {
-
+    public void renderPoints2(Player player1, Player player2, int pontos1, int pontos2) {
+        System.out.println(player1.getName() + ": "+ pontos1);
+        System.out.println(player2.getName() + ": "+ pontos2);
     }
 
     @Override
