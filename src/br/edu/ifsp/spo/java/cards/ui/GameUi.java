@@ -32,7 +32,7 @@ public interface GameUi {
 
     int selectRounds();
 
-    void renderPoints2(Player player1, Player player2, int pontos1, int pontos2);
+    void renderPoints2(Player player1, Player player2);
 
     void renderWinner2(Player player);
 }

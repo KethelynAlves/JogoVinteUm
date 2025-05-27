@@ -7,6 +7,6 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Iniciando Game");
         var vinteUm = new Game(new TerminalGameUi());
-        vinteUm.playMatch();
+        vinteUm.Play();
     }
 }

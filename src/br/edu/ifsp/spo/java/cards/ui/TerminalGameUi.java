@@ -88,8 +88,7 @@ public class TerminalGameUi implements GameUi {
 
     @Override
     public void renderWinner(Player winner) {
-        System.out.println("\nO vencedor é:");
-        System.out.println(winner);
+        System.out.println("\nO vencedor é:"+winner.getName());
     }
 
     @Override
@@ -105,14 +104,14 @@ public class TerminalGameUi implements GameUi {
     }
 
     @Override
-    public void renderPoints2(Player player1, Player player2, int pontos1, int pontos2) {
-        System.out.println(player1.getName() + ": "+ pontos1);
-        System.out.println(player2.getName() + ": "+ pontos2);
+    public void renderPoints2(Player player1, Player player2) {
+        System.out.println(player1.getName() + ": " + player1.points);
+        System.out.println(player2.getName() + ": " + player2.points);
     }
 
     @Override
     public void renderWinner2(Player player) {
-
+        System.out.println("\nO jogador " + player.getName() +" venceu com "+player.points+" pontos.");
     }
 
 }
