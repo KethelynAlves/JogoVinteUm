@@ -67,8 +67,10 @@ public class Game {
 
         this.ui.renderPoints2(this.player1,this.player2);
         if (this.player1.points>this.player2.points){
+            System.out.println("\n");
             this.ui.renderWinner2(this.player1);
         } else {
+            System.out.println("\n");
             this.ui.renderWinner2(this.player2);
         }
     }
